@@ -1,4 +1,4 @@
-# UNav Navigation Tutorial
+# UNav Tutorial
 
 This tutorial provides a step-by-step guide on how to use the UNav navigation package for localization and navigation.
 
