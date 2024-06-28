@@ -37,13 +37,16 @@ class DataHandler:
         }
 
         def download_file_from_google_drive(file_id, destination):
-            gdown.download(f'https://drive.google.com/uc?id={file_id}', destination, quiet=False)
+            if not os.path.exists(destination):
+                gdown.download(f'https://drive.google.com/uc?id={file_id}', destination, quiet=False)
+                logging.info(f"Downloaded {destination}")
+            else:
+                logging.info(f"{destination} already exists. Skipping download.")
 
         for filename, file_id in files.items():
-            logging.info(f"Downloading {os.path.join(self.new_root_dir, filename)}")
+            logging.info(f"Processing {os.path.join(self.new_root_dir, filename)}")
             file_path = os.path.join(self.new_root_dir, filename)
             download_file_from_google_drive(file_id, file_path)
-            logging.info(f"Downloaded {filename}")
 
     def rearrange_data(self):
         zip_files = ["6th_floor.zip", "maps.zip"]
